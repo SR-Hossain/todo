@@ -57,7 +57,7 @@ class TodosStateNotifier extends StateNotifier<Todos> {
 
   int getLength() => state.getTodosLength();
 
-  int availableIdForNewTodo() => state.getTodos()[getLength() - 1].id + 1;
+  int availableIdForNewTodo() => state.getTodos().isNotEmpty? state.getTodos()[getLength() - 1].id + 1 : 0;
 
   int createNewBlankTodo() {
     int id = availableIdForNewTodo();
