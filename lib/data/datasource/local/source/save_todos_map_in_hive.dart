@@ -9,7 +9,7 @@ class SaveTodosListInHive implements TodosLocalDataSource {
   Future<void> call() async {
     var database = await Hive.openBox('todos');
     database.put('list', updatedTodoList);
-    database.close();
+    // await database.close();
     print('save e ashse');
   }
 }

@@ -50,6 +50,7 @@ class _HomePageState extends ConsumerState<HomePageRoute> {
                   ref
                       .watch(selectedTodosStateNotifierProvider.notifier)
                       .processIndex(id);
+                  print('print to hoilo');
                 } else {
                   Navigator.push(
                     context,
