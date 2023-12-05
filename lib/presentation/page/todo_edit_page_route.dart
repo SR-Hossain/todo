@@ -34,6 +34,7 @@ class _TodoEditPageRouteState extends ConsumerState<TodoEditPageRoute> {
             id: id,
             title: titleController.text,
             description: descriptionController.text);
+        return;
       },
       child: Scaffold(
         backgroundColor: Colors.yellow,

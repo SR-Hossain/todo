@@ -10,6 +10,5 @@ class SaveTodosListInHive implements TodosLocalDataSource {
     var database = await Hive.openBox('todos');
     database.put('list', updatedTodoList);
     // await database.close();
-    print('save e ashse');
   }
 }

@@ -10,36 +10,31 @@ class TodoTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Expanded(
-            flex: 0,
-            child: Text(
-              '$title\n',
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-              maxLines: 2,
-              // overflow: TextOverflow.ellipsis,
-              // textAlign: TextAlign.center,
-            )),
+        Text(
+          '$title\n',
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          maxLines: 2,
+          // overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.center,
+        ),
         //
 
         const Gap(10),
 
-        Expanded(
-          // flex: 3,
-          // fit: FlexFit.loose,
-          child: Text(
-            description,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              fontSize: 13.0,
-              color: Color(0xFF212121),
-            ),
-            maxLines: 6,
-            textAlign: TextAlign.left,
+        Text(
+          description,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontSize: 13.0,
+            color: Color(0xFF212121),
           ),
+          maxLines: 6,
+          textAlign: TextAlign.left,
         ),
         // SizedBox(
         //   width: 150,
