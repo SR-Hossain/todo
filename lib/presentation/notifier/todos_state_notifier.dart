@@ -42,6 +42,8 @@ class TodosStateNotifier extends StateNotifier<Todos> {
     return _getTodoById(id).description;
   }
 
+  isTodoComplete(int id) => _getTodoById(id).isComplete;
+
   Future<void> updateTodo({
     required id,
     required String title,
