@@ -35,7 +35,7 @@ class TodoTileWidget extends StatelessWidget {
               fontFamily: 'Roboto',
               color: Color(0xFF212121),
             ),
-            maxLines: 4,
+            maxLines: 8,
             textAlign: TextAlign.left,
           ),
         ),
