@@ -1,9 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/domain/model/todos.dart';
-import 'package:todo/presentation/notifier/todos_state_notifier.dart';
-import 'package:get_it/get_it.dart';
+import 'package:todo/dependency_injection.dart';
+import 'package:todo/domain/model/todo.dart';
+import 'package:todo/domain/usecase/fetch_todo_use_case.dart';
+import 'package:todo/presentation/notifier/todo_list_state_notifier.dart';
 
-var todosStateNotifierProvider =
-    StateNotifierProvider<TodosStateNotifier, Todos>(
-        (ref) => TodosStateNotifier(GetIt.instance<Todos>()));
-
+var todoListProvider = StateNotifierProvider<TodoListStateNotifier, List<Todo>>(
+    (ref) => TodoListStateNotifier([]));

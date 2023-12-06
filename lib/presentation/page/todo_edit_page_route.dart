@@ -20,9 +20,9 @@ class _TodoEditPageRouteState extends ConsumerState<TodoEditPageRoute> {
 
   @override
   Widget build(BuildContext context) {
-    var todosStateNotifier = ref.watch(todosStateNotifierProvider.notifier);
-    final String title = todosStateNotifier.todoTitle(id);
-    final String description = todosStateNotifier.todoDescription(id);
+    var todosStateNotifier = ref.watch(todoListProvider.notifier);
+    final String title = todosStateNotifier.getTitleById(id: id);
+    final String description = todosStateNotifier.getDescriptionById(id: id);
     final TextEditingController titleController =
         TextEditingController(text: title);
     final TextEditingController descriptionController =

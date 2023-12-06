@@ -4,25 +4,16 @@ class SelectedTodosStateNotifier extends StateNotifier<Set> {
   SelectedTodosStateNotifier(super.state);
 
   void processIndex(int id) {
-    // state = {1};
-    if (state.contains(id)) {
-      state.remove(id);
-    } else {
-      state.add(id);
-    }
+    state.contains(id) ? state.remove(id) : state.add(id);
+
     state = state.toSet();
-    // print(state);
   }
 
-  bool isSelected(int id) {
-    return state.contains(id);
-  }
+  Set getIdSet() => state;
 
-  int howManyTodoSelected() {
-    return state.length;
-  }
+  bool isSelected(int id) => state.contains(id);
 
-  void reset() {
-    state = {};
-  }
+  int howManyTodoSelected() => state.length;
+
+  void reset() => state = {};
 }

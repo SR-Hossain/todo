@@ -18,19 +18,20 @@ class HomePageRoute extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePageRoute> {
   @override
   Widget build(BuildContext context) {
-    var todos = ref.watch(todosStateNotifierProvider).getTodos();
-    var todosStateNotifier = ref.watch(todosStateNotifierProvider.notifier);
+    var todoListNotifier = ref.watch(todoListProvider.notifier);
     var todoSelectionNotifier =
         ref.watch(selectedTodosStateNotifierProvider.notifier);
 
     var selectedTodoList = ref.watch(selectedTodosStateNotifierProvider);
+    // todoListNotifier.fetch();
+    //
+
     return Scaffold(
         body: CustomScrollView(
       slivers: <Widget>[
         SliverAppTitleBarWidget(
-          todosStateNotifier: todosStateNotifier,
+          todoListStateNotifier: todoListNotifier,
           todoSelectionNotifier: todoSelectionNotifier,
-          // ref.watch(selectedTodosStateNotifierProvider).length,
         ),
         //
 
@@ -45,12 +46,12 @@ class _HomePageState extends ConsumerState<HomePageRoute> {
               //ontap
 
               onTap: () {
-                int id = todosStateNotifier.getId(todos.length - 1 - index);
+                int id =
+                    todoListNotifier.getIdByIndex(index: index, reversed: true);
                 if (selectedTodoList.isNotEmpty) {
                   ref
                       .watch(selectedTodosStateNotifierProvider.notifier)
                       .processIndex(id);
-                  print('print to hoilo');
                 } else {
                   Navigator.push(
                     context,
@@ -62,7 +63,8 @@ class _HomePageState extends ConsumerState<HomePageRoute> {
               },
 
               onLongPress: () {
-                int id = todosStateNotifier.getId(todos.length - 1 - index);
+                int id =
+                    todoListNotifier.getIdByIndex(index: index, reversed: true);
                 ref
                     .read(selectedTodosStateNotifierProvider.notifier)
                     .processIndex(id);
@@ -76,14 +78,15 @@ class _HomePageState extends ConsumerState<HomePageRoute> {
                       : MediaQuery.of(context).size.width / 2.2,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: todoSelectionNotifier.isSelected(todosStateNotifier
-                            .state
-                            .getTodos()[todos.length - 1 - index]
-                            .id)
+                    color: todoSelectionNotifier.isSelected(todoListNotifier
+                            .getIdByIndex(index: index, reversed: true))
                         ? Colors.orange
-                        : todosStateNotifier.state
-                                .getTodos()[todos.length - 1 - index]
-                                .isComplete
+                        : todoListNotifier
+                                .getTodoById(
+                                  todoListNotifier.getIdByIndex(
+                                      index: index, reversed: true),
+                                )
+                                .isCompleted
                             ? Colors.green
                             : Colors.yellow,
                   ),
@@ -91,17 +94,15 @@ class _HomePageState extends ConsumerState<HomePageRoute> {
                   //
 
                   child: TodoTileWidget(
-                    title: todosStateNotifier.state
-                        .getTodos()[todos.length - 1 - index]
-                        .title,
-                    description: todosStateNotifier.state
-                        .getTodos()[todos.length - 1 - index]
-                        .description,
+                    title: todoListNotifier.getTitleByIndex(
+                        index: index, reversed: true),
+                    description: todoListNotifier.getDescriptionByIndex(
+                        index: index, reversed: true),
                   )),
             ),
 
             //
-            childCount: todos.length,
+            childCount: todoListNotifier.getLength(),
           ),
         )
       ],
