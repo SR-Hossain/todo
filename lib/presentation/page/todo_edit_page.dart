@@ -1,40 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo/presentation/provider/todos_state_notifier_provider.dart';
+import 'package:todo/presentation/notifier/todo_list_notifier.dart';
 
-class TodoEditPageRoute extends ConsumerStatefulWidget {
-  final int id;
-
-  const TodoEditPageRoute({super.key, required this.id});
+class TodoEditPage extends ConsumerStatefulWidget {
+  final int index;
+  const TodoEditPage(
+      {super.key,
+      required this.index,});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() {
-    return _TodoEditPageRouteState(id: id);
-  }
+  ConsumerState createState() =>
+      _TodoEditPageState(index: index);
 }
 
-class _TodoEditPageRouteState extends ConsumerState<TodoEditPageRoute> {
-  final int id;
-
-  _TodoEditPageRouteState({required this.id});
+class _TodoEditPageState extends ConsumerState {
+  int index;
+  _TodoEditPageState(
+      {required this.index});
 
   @override
   Widget build(BuildContext context) {
-    var todosStateNotifier = ref.watch(todoListProvider.notifier);
-    final String title = todosStateNotifier.getTitleById(id: id);
-    final String description = todosStateNotifier.getDescriptionById(id: id);
-    final TextEditingController titleController =
-        TextEditingController(text: title);
-    final TextEditingController descriptionController =
-        TextEditingController(text: description);
-
+    final title=index==-1?'':ref.read(todoListProvider)[index].title;
+    final description=index==-1?'':ref.read(todoListProvider)[index].description;
+    TextEditingController titleController = TextEditingController(text: title);
+    TextEditingController descriptionController = TextEditingController(text: description);
+// OnInvokeCallback(context)
     return PopScope(
       onPopInvoked: (bool x) async {
-        await todosStateNotifier.updateTodo(
-            id: id,
-            title: titleController.text,
-            description: descriptionController.text);
-        return;
+        await ref.read(todoListProvider.notifier).update(
+              index: index,
+              title:
+                  titleController.text == title ? null : titleController.text,
+              description: descriptionController.text == description
+                  ? null
+                  : descriptionController.text,
+            );
       },
       child: Scaffold(
         backgroundColor: Colors.yellow,

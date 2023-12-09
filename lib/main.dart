@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/dependency_injection.dart';
-import 'package:todo/presentation/page/home_page_route.dart';
+import 'package:todo/presentation/page/homepage.dart';
 
-main() async{
-  await initDependencyInjections();
-  runApp(
-    ProviderScope(
+Future<void> main() async {
+  await initDatabase();
+  injectDataSourceDependencyIntoRepository();
+  injectRepositoryDependencyIntoUseCase();
+
+
+  runApp(ProviderScope(
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
+    debugShowCheckedModeBanner: false,
 
-        //
-        theme: ThemeData(fontFamily: "Poppins"),
-        //
+    //
+    theme: ThemeData(fontFamily: "Poppins"),
+    //
 
-        home: const HomePageRoute(),
-      ),
-    ),
-  );
+    home: const HomePage(),
+  )));
 }

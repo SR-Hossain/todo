@@ -36,22 +36,6 @@ class TodoTileWidget extends StatelessWidget {
           maxLines: 6,
           textAlign: TextAlign.left,
         ),
-        // SizedBox(
-        //   width: 150,
-        //   // fit: FlexFit.loose,
-        //   child: Text(
-        //     description,
-        //     overflow: TextOverflow.ellipsis,
-        //     style: const TextStyle(
-        //       fontSize: 13.0,
-        //       color: Color(0xFF212121),
-        //     ),
-        //     maxLines: 5,
-        //     textAlign: TextAlign.left,
-        //   ),
-        // ),
-        // Text('bolod sami'),
-        // Text('bolod sami'),
       ],
     );
   }
