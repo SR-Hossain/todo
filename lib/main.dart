@@ -8,15 +8,13 @@ Future<void> main() async {
   injectDataSourceDependencyIntoRepository();
   injectRepositoryDependencyIntoUseCase();
 
-
-  runApp(ProviderScope(
+  runApp(
+    ProviderScope(
       child: MaterialApp(
-    debugShowCheckedModeBanner: false,
-
-    //
-    theme: ThemeData(fontFamily: "Poppins"),
-    //
-
-    home: const HomePage(),
-  )));
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: "Poppins"),
+        home: const HomePage(),
+      ),
+    ),
+  );
 }

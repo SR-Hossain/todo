@@ -14,14 +14,17 @@ class SliverAppTitleBarWidget extends StatelessWidget {
       pinned: true,
       floating: false,
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding:
-            const EdgeInsets.only(left: 30.0, bottom: 60.0), // Add padding to shift title left
+        titlePadding: const EdgeInsets.only(
+            left: 60.0, top: 40, bottom: 15), // Add padding to shift title left
 
-        title: const Text(
-          "To-Do",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 36.0,
+        title: Align(
+          alignment: Alignment.centerLeft,
+          child: const Text(
+            "To-Do",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 26.0,
+            ),
           ),
         ),
         background: Image.asset(
@@ -64,8 +67,10 @@ class SliverAppTitleBarWidget extends StatelessWidget {
                         icon: const Icon(Icons.delete),
                         color: Colors.red,
                         tooltip: 'Delete selected TodoTile(s)',
-                        onPressed: () async{
-                          await ref.read(todoListProvider.notifier).deleteSet(ref.read(selectedTodoProvider));
+                        onPressed: () async {
+                          await ref
+                              .read(todoListProvider.notifier)
+                              .deleteSet(ref.read(selectedTodoProvider));
                           ref.read(selectedTodoProvider.notifier).reset();
                         },
                       ),
@@ -74,7 +79,10 @@ class SliverAppTitleBarWidget extends StatelessWidget {
                         color: Colors.green,
                         tooltip: 'Mark selected TodoTile(s) as complete',
                         onPressed: () async {
-                          await ref.read(todoListProvider.notifier).toggleIsCompleteMarkedSet(ref.read(selectedTodoProvider));
+                          await ref
+                              .read(todoListProvider.notifier)
+                              .toggleIsCompleteMarkedSet(
+                                  ref.read(selectedTodoProvider));
                           ref.read(selectedTodoProvider.notifier).reset();
                         },
                       ),
@@ -82,7 +90,8 @@ class SliverAppTitleBarWidget extends StatelessWidget {
                         icon: const Icon(Icons.close),
                         color: Colors.black,
                         tooltip: 'Mark selected TodoTile(s) as incomplete',
-                        onPressed: () => ref.read(selectedTodoProvider.notifier).reset(),
+                        onPressed: () =>
+                            ref.read(selectedTodoProvider.notifier).reset(),
                       ),
                     ],
                   );
@@ -95,7 +104,6 @@ class SliverAppTitleBarWidget extends StatelessWidget {
 
   handleDelete() {}
 }
-
 
 void showAdminInfo({required context}) {
   showDialog(
